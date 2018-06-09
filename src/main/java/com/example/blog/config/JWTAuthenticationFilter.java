@@ -1,5 +1,6 @@
 package com.example.blog.config;
 
+import com.example.blog.controllers.RegisterController;
 import com.example.blog.objects.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -59,5 +60,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(ALGORITHM, SECRET_BYTES)
                 .compact();
         response.addHeader(AUTHORITIES_CLAIM_KEY, TOKEN_PREFIX + token);
+        response.addHeader("Access-Control-Expose-Headers", AUTHORITIES_CLAIM_KEY);
     }
 }
