@@ -14,6 +14,6 @@ public class UserController {
     @RequestMapping(value = "/tester", method = RequestMethod.GET)
     @ResponseBody
     public String showUserCredential(Principal principal) {
-        return principal.toString();
+        return principal.getName();
     }
 }
