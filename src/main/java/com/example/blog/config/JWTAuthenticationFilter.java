@@ -1,7 +1,6 @@
 package com.example.blog.config;
 
-import com.example.blog.controllers.RegisterController;
-import com.example.blog.objects.ApplicationUser;
+import com.example.blog.objects.UserShort;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +34,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            ApplicationUser credentials = new ObjectMapper()
-                    .readValue(request.getInputStream(), ApplicationUser.class);
+            UserShort credentials = new ObjectMapper()
+                    .readValue(request.getInputStream(), UserShort.class);
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -54,6 +53,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
+
         String token = Jwts.builder()
                 .setSubject(((UserDetails) authResult.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
