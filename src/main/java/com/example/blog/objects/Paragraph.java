@@ -18,5 +18,5 @@ public class Paragraph {
     private Long id;
     private String content;
     private Date modified;
-    
+
 }
