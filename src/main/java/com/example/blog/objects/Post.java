@@ -27,7 +27,6 @@ public class Post {
             cascade = CascadeType.ALL,
             orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
-    //@JsonIgnore
     private Set<PostComment> comments = new HashSet<>();
 
     @OneToMany(
@@ -36,17 +35,14 @@ public class Post {
             fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id")
     @OrderBy("id  asc ")
-    //@JsonIgnore
     private Set<Paragraph> paragraphs = new HashSet<>();
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE,
-    }, fetch = FetchType.EAGER)
+            CascadeType.MERGE,}, fetch = FetchType.EAGER)
     @JoinTable(name = "post_tags",
             joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new HashSet<>();
 }
 
